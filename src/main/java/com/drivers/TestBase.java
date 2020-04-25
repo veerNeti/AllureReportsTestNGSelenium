@@ -6,7 +6,7 @@ import com.implementation.WebDriverManagementImp;
 import com.services.RestServiceUtil;
 import com.services.WaitforInterface;
 import com.services.WebDriverManagement;
-import com.utilities.PropertiesReader;
+import com.testdatareader.PropertiesReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;

@@ -3,6 +3,7 @@
 <suite name="All Test Suite">
     <listeners>
         <listener class-name="com.extentreporter.TestListener"/>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
     <test verbose="5" preserve-order="true" name="D:/GitProject/SeleniumUIAutomation" parallel="classes" thread-count="2">
         <classes>

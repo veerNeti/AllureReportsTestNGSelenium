@@ -7,12 +7,17 @@ import com.implementation.BrowserInteractionServiceImplementation;
 import com.implementation.WaitImp;
 import com.services.BrowserInteractionService;
 import com.services.WaitforInterface;
-import com.utilities.PropertiesReader;
+import com.testdatareader.PropertiesReader;
 import io.qameta.allure.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -97,6 +102,8 @@ public class HomePageNavBar extends TestBase {
     void testSideBarOptionsVisibility(String auTestURL, String userName, String password) {
         this.waitforInterface = new WaitImp(webDriverInstance);
         assertThat(waitforInterface.waitTillWebElementToBeClickable(homePO.getLeftSideBarVerticalMenuItems()).isDisplayed());
+        List x=new ArrayList();
+        Iterator li=x.iterator();
     }
 
 

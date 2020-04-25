@@ -6,7 +6,7 @@ import com.implementation.BrowserInteractionServiceImplementation;
 import com.implementation.WaitImp;
 import com.services.BrowserInteractionService;
 import com.services.WaitforInterface;
-import com.utilities.PropertiesReader;
+import com.testdatareader.PropertiesReader;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

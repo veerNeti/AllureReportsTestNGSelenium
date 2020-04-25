@@ -27,7 +27,6 @@
         <!--        <allure-testng.version>2.13.2</allure-testng.version>-->
         <!--        <aspectj.version>1.7.4</aspectj.version>-->
         <allure.version>2.13.2</allure.version>
-
         <!--For Allure report-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -36,7 +35,6 @@
         <!--        <selenium.version>4.0.0-alpha-5</selenium.version>-->
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
         <maven.build.helper.plugin.version>3.0.0</maven.build.helper.plugin.version>
-        <poi.version>4.1.1</poi.version>
         <httpclient.version>4.5.2</httpclient.version>
         <selenium-java.version>3.141.5</selenium-java.version>
         <logback-classic.version>1.0.13</logback-classic.version>
@@ -49,6 +47,8 @@
         <lombok.version>1.18.12</lombok.version>
         <extentreports.version>3.1.5</extentreports.version>
         <log4j-api.version>2.13.1</log4j-api.version>
+        <apache-poi.version>4.1.2</apache-poi.version>
+        <commons-io.version>2.6</commons-io.version>
     </properties>
 
     <dependencies>
@@ -104,36 +104,18 @@
 
 
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.14.0</version>
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson-core.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -175,6 +157,28 @@
             <scope>test</scope>
         </dependency>
         <!--        AllureReport-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+                  <version>${apache-poi.version}</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache-poi.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
 
 
     </dependencies>
