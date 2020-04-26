@@ -7,23 +7,27 @@ import com.services.RestServiceUtil;
 import com.services.WaitforInterface;
 import com.services.WebDriverManagement;
 import com.testdatareader.PropertiesReader;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+
+import java.util.Objects;
 /*
 
 WebDriverManagement--> is the interface to instantiate/serve the driver
  */
 
 public abstract class TestBase {
-    private static final Logger logger = LogManager.getLogger(TestBase.class.getName());
+    private static Logger logger = LogManager.getLogger(TestBase.class.getName());
     protected WebDriver webDriverInstance;
     protected RestServiceUtil restServiceUtil;
     protected WebDriverManagement webDriverManagement;
     protected WaitforInterface waitforInterface;
     private PropertiesReader propertiesReader;
+
 
     public TestBase() {
         super();
@@ -36,22 +40,19 @@ public abstract class TestBase {
 
     @BeforeClass (description = "Configure Logger and Webdriver before class")
     public void beforeTest() {
-        logger.info("----Started Logging the Test----");
-        logger.info("closing the browser");
+        logger.info("starting Web driver!!");
         this.webDriverInstance = webDriverManagement.setupWebDriverInstance(propertiesReader.getHeadlessflg());
         this.waitforInterface = new WaitImp(webDriverInstance);
-        if (this.webDriverInstance == null) {
-            logger.warn("Crashed");
-            logger.error("Webdriver instance is throwing:"+this.waitforInterface );
+        if (Objects.isNull(this.webDriverInstance ) ) {
+            logger.error("WebDriver Crashed", new NullPointerException());
+            logger.throwing(Level.FATAL, new NullPointerException());
         }
-
-
     }
 
     @AfterClass (description = "Configure Logger and Webdriver after class")
     public void tearDown() {
         logger.info("closing the browser");
-        logger.error("Webdriver instance is throwing:"+this.waitforInterface );
+        logger.info("Webdriver instance is throwing:"+this.waitforInterface );
         webDriverManagement.quitWebDriverInstance();
     }
 

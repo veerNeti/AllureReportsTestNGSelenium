@@ -1,8 +1,9 @@
 package com.implementation;
 
-import com.paulhammant.*;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.services.WaitforInterface;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class WaitImp implements WaitforInterface {
+    private static Logger logger = LogManager.getLogger(WaitImp.class.getName());
     private final long MAXTIMEOUT = 100L;
     protected WebDriver driver;
     NgWebDriver ngWebDriver;
@@ -91,11 +93,13 @@ public class WaitImp implements WaitforInterface {
         ExpectedCondition<WebElement> condition = ExpectedConditions.visibilityOf(webElement);
         return new WebDriverWait(driver, MAXTIMEOUT * 60).until(condition);
     }
+
     @Override
     public WebElement webDriverWaitTillVisibilityOfBy(By by) {
         ExpectedCondition<WebElement> condition = ExpectedConditions.visibilityOf(driver.findElement(by));
         return new WebDriverWait(driver, MAXTIMEOUT * 60).until(condition);
     }
+
     @Override
     public WebElement webDriverWaitTillVisibilityOfElementBy(WebDriver driver, By by) {
         WebElement element = driver.findElement(by);
@@ -127,7 +131,7 @@ public class WaitImp implements WaitforInterface {
         WebElement element = (WebElement) this.fluentWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForElementVisible: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForElementVisible: " + timeElapsed);
         return element;
     }
 
@@ -145,7 +149,7 @@ public class WaitImp implements WaitforInterface {
         Boolean until = (Boolean) this.fluentWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Total time in Seconds]wait For Element Not Visible: " + timeElapsed);
+        logger.info("[Total time in Seconds]wait For Element Not Visible: " + timeElapsed);
         return until;
     }
 
@@ -163,7 +167,7 @@ public class WaitImp implements WaitforInterface {
         WebElement element = (WebElement) this.fluentWait.until(ExpectedConditions.visibilityOf(e));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForElementVisible: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForElementVisible: " + timeElapsed);
         return element;
     }
 
@@ -192,7 +196,7 @@ public class WaitImp implements WaitforInterface {
         Boolean bool = (Boolean) this.fluentWait.until(ExpectedConditions.elementToBeSelected(e));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForElementSelected: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForElementSelected: " + timeElapsed);
         return bool;
     }
 
@@ -210,7 +214,7 @@ public class WaitImp implements WaitforInterface {
         WebElement webElement = (WebElement) this.fluentWait.until(ExpectedConditions.elementToBeClickable(locator));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForElementClickable: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForElementClickable: " + timeElapsed);
         return webElement;
     }
 
@@ -228,7 +232,7 @@ public class WaitImp implements WaitforInterface {
         Instant finish = Instant.now();
         WebElement element = (WebElement) this.fluentWait.until(ExpectedConditions.elementToBeClickable(e));
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForElementClickable: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForElementClickable: " + timeElapsed);
         return element;
     }
 
@@ -245,7 +249,7 @@ public class WaitImp implements WaitforInterface {
         Boolean flag = (Boolean) this.fluentWait.until(ExpectedConditions.titleContains(title));
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForPageTitle: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForPageTitle: " + timeElapsed);
         return flag;
     }
 
@@ -253,7 +257,7 @@ public class WaitImp implements WaitforInterface {
     public WebElement fluentWaitPlain(WebElement element) {
         waitForAngularRequestsToFinish();
         Instant start = Instant.now();
-        System.out.println("waitandpoll");
+        logger.info("waitandpoll");
         this.fluentWait = new FluentWait<WebDriver>(driver)
                 .pollingEvery(MAXTIMEOUT, TimeUnit.SECONDS)
                 .withTimeout(MAXTIMEOUT, TimeUnit.MINUTES)
@@ -272,7 +276,7 @@ public class WaitImp implements WaitforInterface {
         }
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("[Time in Seconds] waitForPageTitle: " + timeElapsed);
+        logger.info("[Time in Seconds] waitForPageTitle: " + timeElapsed);
         return foo;
     }
 
@@ -283,7 +287,7 @@ public class WaitImp implements WaitforInterface {
             Thread.sleep(length * 1000);
 
             /*Thread.sleep(4 * 60 * 1000);
-            System.out.println("Sleeping for 4 minutes using TimeUnit sleep()");
+            logger.info("Sleeping for 4 minutes using TimeUnit sleep()");
 
             TimeUnit.SECONDS.sleep(4);
             TimeUnit.MINUTES.sleep(4);

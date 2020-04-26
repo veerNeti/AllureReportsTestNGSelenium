@@ -12,11 +12,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.Base64;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class ExcelReader {
+    private static Logger logger = LogManager.getLogger(ExcelReader.class.getName());
     String pathname = System.getProperty("user.dir") + "/src/test/resources/testdata.xlsx";
-    private static final Logger logger = LogManager.getLogger(ExcelReader.class);
     private FileInputStream inputStream;
     private String aut;
     private String userName;
@@ -71,7 +73,7 @@ public class ExcelReader {
                                     }
                                     break;
                                 case ERROR:
-                                    System.out.println(row.getCell(col).getErrorCellValue());
+                                    logger.info(row.getCell(col).getErrorCellValue());
                                     break;
                             }
 
@@ -85,7 +87,7 @@ public class ExcelReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(toString());
+        logger.info(this::toString);
     }
 
     @Override

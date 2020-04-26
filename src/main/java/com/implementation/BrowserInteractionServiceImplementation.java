@@ -3,6 +3,8 @@ package com.implementation;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.services.BrowserInteractionService;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.*;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -19,6 +21,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
         , WebDriver, JavascriptExecutor, TakesScreenshot,
         WrapsDriver, HasInputDevices, HasTouchScreen,
         Interactive, HasCapabilities {
+    private static Logger logger = LogManager.getLogger(BrowserInteractionServiceImplementation.class.getName());
     final long timeOutInSeconds = 20L;
     final int WAITONDATA = 10;
     WebDriver driver;
@@ -31,6 +34,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
     }
 
     public static String getScreenShot(WebDriver driver, String screenshotName) throws IOException {
+        logger.info("Taking Screenshot");
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
@@ -43,16 +47,19 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
 
     @Override
     public void generateAlert(String message) {
+        logger.info("generating JS alert");
         javascriptExecutor.executeScript("alert('" + message + "')");
     }
 
     @Override
     public void maximizeWindow() {
+        logger.info("maximizing browser window");
         driver.manage().window().maximize();
     }
 
     @Override
     public void minimizeWindow() {
+        logger.info("Minimizing the browser window");
         driver.manage().window().setPosition(new Point(0, -2000));
     }
 
@@ -61,6 +68,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
      */
     @Override
     public void resizeWindow(int width, int height) {
+        logger.info("resizing the browser window");
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         Object innerWidth = javascriptExecutor.executeScript("return window.innerWidth;").toString();
         driver.manage().window().getSize().getWidth();
@@ -80,7 +88,9 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
-        return null;
+        logger.info("Taking Screenshot");
+
+        return (X) ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
     @Override
@@ -208,7 +218,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
 
     @Override
     public void getAttribute(WebElement element) {
-        System.out.println("clicked:  " + element.getAttribute("innerText"));
+        logger.info("clicked:  " + element.getAttribute("innerText"));
         element.click();
     }
 
@@ -223,7 +233,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
     @Override
     public boolean isElementPresentBy(By by) {
         try {
-            System.out.println("isElementPresent::");
+            logger.info("isElementPresent::");
             WebElement element = driver.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
@@ -248,7 +258,7 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
             if (labelAddOn.equalsIgnoreCase(AddOns)) {
                 if (!Boolean.parseBoolean(ele.getAttribute("aria-checked"))) {
                     ele.click();
-                    System.out.println("Checked:  " + labelAddOn);
+                    logger.info("Checked:  " + labelAddOn);
                 }
             }
         }

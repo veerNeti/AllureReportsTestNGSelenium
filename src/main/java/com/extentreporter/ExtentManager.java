@@ -4,6 +4,10 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.drivers.TestBase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import sun.rmi.runtime.Log;
 
 import java.io.File;
 
@@ -13,6 +17,7 @@ import java.io.File;
 //Reference: http://extentreports.com/docs/versions/3/java/
 //**********************************************************************************************************
 public class ExtentManager {
+    private static Logger logger = LogManager.getLogger(ExtentManager.class.getName());
     static String projectName = "SeleniumUIAutomation";
     private static ExtentReports extent;
     private static String reportFileName = "ExtentReports.html";
@@ -37,7 +42,7 @@ public class ExtentManager {
         htmlReporter.config().setReportName(projectName);
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
-
+        logger.info("Building Extent reports uner path: "+extentReportPath);
         return extent;
     }
 
@@ -47,12 +52,16 @@ public class ExtentManager {
         File testDirectory = new File(path);
         if (!testDirectory.exists()) {
             if (testDirectory.mkdir()) {
-                System.out.println("Directory: " + path + " is created!");
+logger.info("Directory: " + path + " is created!");
+                logger.info("Directory: " + path + " is created!");
             } else {
-                System.out.println("Failed to create directory: " + path);
+logger.info("Failed to create directory: " + path);
+                logger.error("Failed to create directory: " + path);
             }
         } else {
-            System.out.println("Directory already exists: " + path);
+//            logger.info("Directory already exists: " + path);
+            logger.info("Directory already exists: " + path);
+
         }
     }
 

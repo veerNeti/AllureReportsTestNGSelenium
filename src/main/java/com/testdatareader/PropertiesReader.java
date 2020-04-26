@@ -1,6 +1,6 @@
 package com.testdatareader;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +10,7 @@ import java.util.Base64;
 import java.util.Properties;
 
 public class PropertiesReader {
-    private static final Logger logger = LogManager.getLogger(PropertiesReader.class);
+    private static Logger logger = LogManager.getLogger(PropertiesReader.class.getName());
     private FileInputStream fileInputStream;
     private String propFileName;
     private Properties prop;
@@ -38,20 +38,15 @@ public class PropertiesReader {
             this.password = Base64.getEncoder().encodeToString(prop.getProperty("application.password").getBytes());
             this.browser = prop.getProperty("browser");
             this.headlessflg = prop.getProperty("headless");
-            logger.info("Properties file values are read successfully:" +
-                    "aut='" + aut + '\'' +
-                    ", userName='" + userName + '\'' +
-                    ", password='" + password + '\'' +
-                    ", browser='" + browser + '\'' +
-                    ", headlessflg='" + headlessflg + '\'' +
-                    '}');
+
         } catch (Exception e) {
-            logger.throwing(Level.FATAL,e);
         }
+        logger.info(this::toString);
     }
 
     @Override
     public String toString() {
+
         return "PropertiesReader{" +
                 "aut='" + aut + '\'' +
                 ", userName='" + userName + '\'' +
@@ -75,7 +70,7 @@ public class PropertiesReader {
     }
 
     public String getPassword() {
-        return password;
+        return decodePassword(password);
     }
 
     public String getBrowser() {

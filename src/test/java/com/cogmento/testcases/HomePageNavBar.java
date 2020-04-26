@@ -17,18 +17,16 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HomePageNavBar extends TestBase {
-    private static final Logger logger = LogManager.getLogger(HomePageNavBar.class);
     private PropertiesReader propertiesReader;
     private HomePO homePO;
     private LoginPO loginPO;
     private WaitforInterface waitforInterface;
     private BrowserInteractionService browserInteractionService;
-
+    private static Logger logger = LogManager.getLogger(HomePageNavBar.class.getName());
     public HomePageNavBar() {
         super();
         this.propertiesReader = new PropertiesReader();
@@ -64,7 +62,7 @@ public class HomePageNavBar extends TestBase {
     @Story("Story Name: Validate the homePage")
     void testHomeNavBarUserNameVisibility(String auTestURL, String userName, String password) {
         this.waitforInterface = new WaitImp(webDriverInstance);
-        assertThat(waitforInterface.webDriverWaitTillVisibilityOfBy(homePO.getUserName()).isDisplayed());
+        assertThat(waitforInterface.webDriverWaitTillVisibilityOfBy(homePO.getUserNamedisplay()).isDisplayed());
     }
 
 
@@ -74,7 +72,7 @@ public class HomePageNavBar extends TestBase {
     @Story("Story Name: Validate the homePage")
     void testNavBarUserNameTextVisibility(String auTestURL, String userName, String password) {
         this.waitforInterface = new WaitImp(webDriverInstance);
-        assertThat(waitforInterface.waitFluentForTexttoBeBy(homePO.getUserName()).compareToIgnoreCase("Veer Neti"));
+        assertThat(waitforInterface.waitFluentForTexttoBeBy(homePO.getUserNamedisplay()).compareToIgnoreCase("Veer Neti"));
     }
 
     @Test(dependsOnMethods = "testNavBarUserNameTextVisibility",dataProvider = "Authentication", groups = "navbar",description = "Verify Nav Bar Trail Indicator Visibility")

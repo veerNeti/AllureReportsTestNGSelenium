@@ -3,4 +3,4 @@ application.username = Veercraig@gmail.com
 application.password = pD@zZVvh7pVWJbS
 
 browser = chrome
-headless=false
+headless=true

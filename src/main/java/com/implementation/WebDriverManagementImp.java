@@ -4,6 +4,8 @@ import com.services.DateConverterService;
 import com.services.WebDriverManagement;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
@@ -20,17 +22,19 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class WebDriverManagementImp implements WebDriverManagement {
+    private static Logger logger = LogManager.getLogger(WebDriverManagementImp.class.getName());
     private static final String IMG_NAME = "screenshot.png";
     // A static image stored under classpath
     private static final String IMG_PATH = "src/test/resources/" + IMG_NAME;
     // Using the same OUTPUT_PATH as set in extent.properties
     private static final String OUTPUT_PATH = "test-output/HtmlReport/";
     private final long MAXTIMEOUT = 100L;
-    DateConverterService dateConverter = new DateConverter();
+    DateConverterService dateConverter ;
     private WebDriver driver;
 
     public WebDriverManagementImp(WebDriver driver) {
         this.driver = driver;
+        this.dateConverter= new DateConverter();
     }
 
     String getImage() throws IOException {
@@ -45,7 +49,7 @@ public class WebDriverManagementImp implements WebDriverManagement {
         String pathname = System.getProperty("user.dir") + "/target/Screenshots/" + methodName + "_" + System.currentTimeMillis() + ".png";
         File file = new File(pathname);
         if (!file.exists()) {
-            System.out.println("File created " + file);
+            logger.info("File created " + file);
             file.mkdir();
         }
         try {

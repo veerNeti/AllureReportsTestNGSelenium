@@ -1,6 +1,8 @@
 package com.implementation;
 
 import com.services.RestServiceUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +13,11 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class RestServiceUtilImplimentation implements RestServiceUtil {
+    private static Logger logger = LogManager.getLogger(RestServiceUtilImplimentation.class.getName());
+
     @Override
     public HttpURLConnection urlConnectionValidator(URL url) throws InterruptedException, IOException {
-
+        logger.info("urlConnectionValidator :" + url.toString());
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         /**
          * Set the method for the URL request, one of:
@@ -39,110 +43,110 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
 //        connection.setRequestMethod("HEAD");
         switch (connection.getResponseCode()) {
             case HttpURLConnection.HTTP_ACCEPTED:
-//                System.out.println(url + "**Status-Code 202: Accepted**");
+                logger.info(url + "**Status-Code 202: Accepted**");
                 break;
             case HttpURLConnection.HTTP_BAD_GATEWAY:
-//                System.out.println(url + "**HTTP Status-Code 502: Bad Gateway.**");
+                logger.info(url + "**HTTP Status-Code 502: Bad Gateway.**");
                 break;
             case HttpURLConnection.HTTP_BAD_METHOD:
-//                System.out.println(url + "**HTTP Status-Code 405: Method Not Allowed.**");
+                logger.info(url + "**HTTP Status-Code 405: Method Not Allowed.**");
                 break;
 
             case HttpURLConnection.HTTP_BAD_REQUEST:      //200
-//                System.out.println(url + " **HTTP Status-Code 400: Bad Request.**");
+                logger.info(url + " **HTTP Status-Code 400: Bad Request.**");
                 return connection; // **EXIT POINT** fine, go on
             case HttpURLConnection.HTTP_CLIENT_TIMEOUT:
-//                System.out.println(url + " **HTTP Status-Code 408: Request Time-Out.\n**");
+                logger.info(url + " **HTTP Status-Code 408: Request Time-Out.\n**");
                 break;// retry
             case HttpURLConnection.HTTP_CONFLICT:
-//                System.out.println(url + "**HTTP Status-Code 409: Conflict.\n**");
+                logger.info(url + "**HTTP Status-Code 409: Conflict.\n**");
                 break;
             case HttpURLConnection.HTTP_CREATED:
-//                System.out.println(url + "***HTTP Status-Code 201: Created.\n**");
+                logger.info(url + "***HTTP Status-Code 201: Created.\n**");
                 break;
             case HttpURLConnection.HTTP_ENTITY_TOO_LARGE:
-//                System.out.println(url + "***HTTP Status-Code 413: Request Entity Too Large.\n**");
+                logger.info(url + "***HTTP Status-Code 413: Request Entity Too Large.\n**");
                 break;
             case HttpURLConnection.HTTP_FORBIDDEN:
-//                System.out.println(url + "***HTTP Status-Code 403: Forbidden.\n**");
+                logger.info(url + "***HTTP Status-Code 403: Forbidden.\n**");
             case HttpURLConnection.HTTP_GATEWAY_TIMEOUT:
-//                System.out.println(url + "***HTTP Status-Code 504: Gateway Timeout.\n**");
+                logger.info(url + "***HTTP Status-Code 504: Gateway Timeout.\n**");
                 break;
             case HttpURLConnection.HTTP_GONE:
-//                System.out.println(url + "***HTTP Status-Code 410: Gone.\n**");
+                logger.info(url + "***HTTP Status-Code 410: Gone.\n**");
                 break;
             case HttpURLConnection.HTTP_LENGTH_REQUIRED:
-//                System.out.println(url + "***HTTP Status-Code 411: Length Required.\n**");
+                logger.info(url + "***HTTP Status-Code 411: Length Required.\n**");
                 break;
             case HttpURLConnection.HTTP_MOVED_PERM:
-//                System.out.println(url + "***HTTP Status-Code 301: Moved Permanently.\n**");
+                logger.info(url + "***HTTP Status-Code 301: Moved Permanently.\n**");
                 break;
             case HttpURLConnection.HTTP_MOVED_TEMP:
-//                System.out.println(url + "***HTTP Status-Code 302: Temporary Redirect.\n**");
+                logger.info(url + "***HTTP Status-Code 302: Temporary Redirect.\n**");
                 break;
             case HttpURLConnection.HTTP_MULT_CHOICE:
-//                System.out.println(url + "***HTTP Status-Code 300: Multiple Choices.\n**");
+                logger.info(url + "***HTTP Status-Code 300: Multiple Choices.\n**");
                 break;
             case HttpURLConnection.HTTP_NO_CONTENT:
-//                System.out.println(url + "***HTTP Status-Code 204: No Content.\n**");
+                logger.info(url + "***HTTP Status-Code 204: No Content.\n**");
                 break;
             case HttpURLConnection.HTTP_NOT_ACCEPTABLE:
-//                System.out.println(url + "***HTTP Status-Code 406: Not Acceptable.\n**");
+                logger.info(url + "***HTTP Status-Code 406: Not Acceptable.\n**");
                 break;
             case HttpURLConnection.HTTP_NOT_AUTHORITATIVE:
-//                System.out.println(url + "***HTTP Status-Code 203: Non-Authoritative Information.\n**");
+                logger.info(url + "***HTTP Status-Code 203: Non-Authoritative Information.\n**");
                 break;
             case HttpURLConnection.HTTP_NOT_FOUND:
-//                System.out.println(url + "***HTTP Status-Code 404: Not Found.\n**");
+                logger.info(url + "***HTTP Status-Code 404: Not Found.\n**");
                 break;
             case HttpURLConnection.HTTP_NOT_IMPLEMENTED:
-//                System.out.println(url + "***HTTP Status-Code 501: Not Implemented.\n**");
+                logger.info(url + "***HTTP Status-Code 501: Not Implemented.\n**");
                 break;
             case HttpURLConnection.HTTP_NOT_MODIFIED:
-//                System.out.println(url + "***HTTP Status-Code 304: Not Modified.\n**");
+                logger.info(url + "***HTTP Status-Code 304: Not Modified.\n**");
                 break;
             case HttpURLConnection.HTTP_OK:
-//                System.out.println(url + "***HTTP Status-Code 200: OK.\n**");
+                logger.info(url + "***HTTP Status-Code 200: OK.\n**");
                 break;
             case HttpURLConnection.HTTP_PARTIAL:
-//                System.out.println(url + "***HTTP Status-Code 206: Partial Content.\n**");
+                logger.info(url + "***HTTP Status-Code 206: Partial Content.\n**");
                 break;
             case HttpURLConnection.HTTP_PRECON_FAILED:
-//                System.out.println(url + "***HTTP Status-Code 402: Payment Required.\n**");
+                logger.info(url + "***HTTP Status-Code 402: Payment Required.\n**");
                 break;
             case HttpURLConnection.HTTP_PROXY_AUTH:
-//                System.out.println(url + "***HTTP Status-Code 407: Proxy Authentication Required.\n**");
+                logger.info(url + "***HTTP Status-Code 407: Proxy Authentication Required.\n**");
                 break;
             case HttpURLConnection.HTTP_REQ_TOO_LONG:
-//                System.out.println(url + "***HTTP Status-Code 414: Request-URI Too Large.\n**");
+                logger.info(url + "***HTTP Status-Code 414: Request-URI Too Large.\n**");
                 break;
             case HttpURLConnection.HTTP_RESET:
-//                System.out.println(url + "***HTTP Status-Code 205: Reset Content.\n**");
+                logger.info(url + "***HTTP Status-Code 205: Reset Content.\n**");
                 break;
             case HttpURLConnection.HTTP_SEE_OTHER:
-//                System.out.println(url + "***HTTP Status-Code 303: See Other.\n**");
+                logger.info(url + "***HTTP Status-Code 303: See Other.\n**");
                 break;
             case HttpURLConnection.HTTP_SERVER_ERROR:
-//                System.out.println(url + "***Deprecated. \n**");
+                logger.info(url + "***Deprecated. \n**");
                 break;
             case HttpURLConnection.HTTP_UNAUTHORIZED:
-//                System.out.println(url + "***HTTP Status-Code 401: Unauthorized.\n**");
+                logger.info(url + "***HTTP Status-Code 401: Unauthorized.\n**");
                 break;
             case HttpURLConnection.HTTP_UNAVAILABLE:
-//                System.out.println(url + "***HTTP Status-Code 503: Service Unavailable.\n**");
+                logger.info(url + "***HTTP Status-Code 503: Service Unavailable.\n**");
                 break;
             case HttpURLConnection.HTTP_UNSUPPORTED_TYPE:
-//                System.out.println(url + "***HTTP Status-Code 415: Unsupported Media Type.\n**");
+                logger.info(url + "***HTTP Status-Code 415: Unsupported Media Type.\n**");
                 break;
             case HttpURLConnection.HTTP_USE_PROXY:
-//                System.out.println(url + "***HTTP Status-Code 305: Use Proxy.\n**");
+                logger.info(url + "***HTTP Status-Code 305: Use Proxy.\n**");
                 break;
             case HttpURLConnection.HTTP_VERSION:
-//                System.out.println(url + "***HTTP Status-Code 505: HTTP Version Not Supported.\n**");
+                logger.info(url + "***HTTP Status-Code 505: HTTP Version Not Supported.\n**");
                 break;
 
             default:
-                System.out.println(url + " **unknown response code**.");
+                logger.info(url + " **unknown response code**.");
                 break; // abort
         }
         connection.disconnect();
@@ -177,7 +181,7 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
         // For POST only - END
 
         int responseCode = httpURLConnection.getResponseCode();
-        System.out.println("POST Response Code :: " + responseCode);
+        logger.info("POST Response Code :: " + responseCode);
         StringBuffer response = null;
         if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -190,10 +194,11 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
             in.close();
 
             // print result
-            System.out.println(response.toString());
+            logger.info(response.toString());
         } else {
-            System.out.println("POST request not worked");
+            logger.info("POST request not worked");
         }
+        logger.trace(response.toString());
         return response.toString();
 
     }
@@ -213,7 +218,7 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
         httpURLConnection.setRequestProperty("Content-Type", "application/json; utf-8");
         httpURLConnection.setRequestProperty("Accept", "application/json");
 
-        try(OutputStream os = httpURLConnection.getOutputStream()) {
+        try (OutputStream os = httpURLConnection.getOutputStream()) {
             byte[] input = request.getBytes("utf-8");
             os.write(input, 0, input.length);
         }
@@ -228,7 +233,7 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
         // For POST only - END
 
         int responseCode = httpURLConnection.getResponseCode();
-        System.out.println("POST Response Code :: " + responseCode);
+        logger.info("POST Response Code :: " + responseCode);
         StringBuffer response = null;
         if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -241,10 +246,11 @@ public class RestServiceUtilImplimentation implements RestServiceUtil {
             in.close();
 
             // print result
-            System.out.println(response.toString());
+            logger.info(response.toString());
         } else {
-            System.out.println("POST request not worked");
+            logger.info("POST request not worked");
         }
+        logger.trace(response.toString());
         return response.toString();
 
     }

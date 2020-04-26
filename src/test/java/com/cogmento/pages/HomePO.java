@@ -2,15 +2,17 @@ package com.cogmento.pages;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
 @Setter
 @Getter
 public class HomePO {
-
+    private static Logger logger = LogManager.getLogger(HomePO.class.getName());
     By topHeaderMenuLogo = By.cssSelector("div#top-header-menu > .header.item");
     By versionOfApp = By.cssSelector("div#top-header-menu > .item:nth-of-type(2)");
-    By userName = By.cssSelector(".right .user-display");
+    By userNamedisplay = By.cssSelector("#top-header-menu .user-display");
     By trialIndicator = By.cssSelector(".right .trial-indicator");
     By searchField = By.cssSelector("[placeholder='Search']");
     By pinButton = By.cssSelector(".button .icon.pin");
@@ -24,13 +26,7 @@ public class HomePO {
     By checkFreeCRMorCRMProUserButton = By.cssSelector(".column > div.message:nth-of-type(2)");
     By resgisterOrSignUpButton = By.cssSelector(".column > div.message:nth-of-type(3)");
 
-    public By getLeftSideBarVerticalMenu() {
-        return leftSideBarVerticalMenu;
-    }
 
-    public void setLeftSideBarVerticalMenu(By leftSideBarVerticalMenu) {
-        this.leftSideBarVerticalMenu = leftSideBarVerticalMenu;
-    }
 
 
 }
