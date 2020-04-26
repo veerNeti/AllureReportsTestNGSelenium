@@ -7,8 +7,10 @@
     </listeners>
     <test verbose="5" preserve-order="true" name="D:/GitProject/SeleniumUIAutomation" parallel="classes" thread-count="2">
         <classes>
-            <class name="com.cogmento.testcases.HomePageNavBar"/>
-            <class name="com.cogmento.testcases.LoginWorkflow"/>
+            <class name="com.cogmento.testcases.HomePageNavBarUsingDotPropertiesFile"/>
+            <class name="com.cogmento.testcases.HomePageNavBarUsingCSV"/>
+            <class name="com.cogmento.testcases.HomePageNavBarUsingExcelSpreadSheet"/>
+            <class name="com.cogmento.testcases.LoginWorkflowUsingDotPropertiesFile"/>
         </classes>
 
     </test>

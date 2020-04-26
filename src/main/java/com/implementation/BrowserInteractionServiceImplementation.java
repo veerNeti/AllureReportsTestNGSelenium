@@ -271,7 +271,12 @@ public class BrowserInteractionServiceImplementation implements BrowserInteracti
     }
 
     @Override
-    public void clickTheButton(By by) {
+    public void clickByLocator(By by) {
         driver.findElement(by).click();
+    }
+
+    @Override
+    public void clickWebElement(WebElement element) {
+        element.click();
     }
 }

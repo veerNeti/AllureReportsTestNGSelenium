@@ -8,6 +8,8 @@ import com.implementation.WaitImp;
 import com.services.BrowserInteractionService;
 import com.services.WaitforInterface;
 import com.testdatareader.PropertiesReader;
+import com.utilities.GetHelp;
+import com.utilities.TestHelper;
 import io.qameta.allure.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,24 +22,26 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class HomePageNavBar extends TestBase {
+public class HomePageNavBarUsingDotPropertiesFile extends TestBase {
     private PropertiesReader propertiesReader;
     private HomePO homePO;
     private LoginPO loginPO;
     private WaitforInterface waitforInterface;
     private BrowserInteractionService browserInteractionService;
-    private static Logger logger = LogManager.getLogger(HomePageNavBar.class.getName());
-    public HomePageNavBar() {
+    private static Logger logger = LogManager.getLogger(HomePageNavBarUsingDotPropertiesFile.class.getName());
+    private TestHelper testHelper;
+    public HomePageNavBarUsingDotPropertiesFile() {
         super();
         this.propertiesReader = new PropertiesReader();
         this.homePO = new HomePO();
         this.loginPO = new LoginPO();
+        this.testHelper=new GetHelp();
         logger.info("Constructing all local variables. This will not instantiate Wait");
     }
 
     @DataProvider(name = "Authentication")
     public Object[][] credentials() {
-        return new Object[][]{{propertiesReader.getAut(), propertiesReader.getUserName(), propertiesReader.decodePassword(propertiesReader.getPassword())}};
+        return new Object[][]{{propertiesReader.getAut(), propertiesReader.getUserName(), testHelper.decodePassword(propertiesReader.getPassword())}};
     }
 
 
@@ -52,7 +56,7 @@ public class HomePageNavBar extends TestBase {
         this.browserInteractionService = new BrowserInteractionServiceImplementation(webDriverInstance);
         this.browserInteractionService.insertIntoField(loginPO.getUserIdfield(), userName);
         this.browserInteractionService.insertIntoField(loginPO.getPasswordField(), password);
-        this.browserInteractionService.clickTheButton(loginPO.getLoginButton());
+        this.browserInteractionService.clickByLocator(loginPO.getLoginButton());
     }
 
 
@@ -100,8 +104,7 @@ public class HomePageNavBar extends TestBase {
     void testSideBarOptionsVisibility(String auTestURL, String userName, String password) {
         this.waitforInterface = new WaitImp(webDriverInstance);
         assertThat(waitforInterface.waitTillWebElementToBeClickable(homePO.getLeftSideBarVerticalMenuItems()).isDisplayed());
-        List x=new ArrayList();
-        Iterator li=x.iterator();
+
     }
 
 

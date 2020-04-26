@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
-@Setter
 @Getter
 public class HomePO {
     private static Logger logger = LogManager.getLogger(HomePO.class.getName());
@@ -25,6 +24,15 @@ public class HomePO {
     By forgotPasswordbutton = By.cssSelector("div.message:nth-of-type(1)");
     By checkFreeCRMorCRMProUserButton = By.cssSelector(".column > div.message:nth-of-type(2)");
     By resgisterOrSignUpButton = By.cssSelector(".column > div.message:nth-of-type(3)");
+    By navbarDropDown=By.cssSelector(".navbar .dropdown");
+    By navbarDropDownMenu=By.cssSelector(".navbar .dropdown .menu");
+    By navbarDropDownMenuItem=By.cssSelector(".navbar .dropdown .menu .item");
+    By navbarDropDownMenuItemLogout=By.cssSelector(".navbar .dropdown .menu .item .power");
+
+
+
+
+
 
 
 

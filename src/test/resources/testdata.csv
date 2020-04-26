@@ -1,6 +1,4 @@
-application.under.Test=https://ui.cogmento.com/
-application.username = Veercraig@gmail.com
-application.password = pD@zZVvh7pVWJbS
-
-browser = chrome
-headless=true
+https://ui.cogmento.com,Veercraig@gmail.com,pD@zZVvh7pVWJbS,chrome,true,true
+https://ui.cogmento.com,Veercraig@gmail.com,pD@zZVvh7pVWJbS11,chrome,true,fail
+https://ui.cogmento.com,Veercraig@gmail.com1,pD@zZVvh7pVWJbS,chrome,true,fail
+https://ui.cogmento.com,Veercraig@gmail.com1,pD@zZVvh7pVWJbS11,chrome,true,fail

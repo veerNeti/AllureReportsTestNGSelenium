@@ -15,16 +15,16 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LoginWorkflow extends TestBase {
+public class LoginWorkflowUsingDotPropertiesFile extends TestBase {
     private PropertiesReader propertiesReader;
     private LoginPO loginPO;
     private HomePO homePO;
-    private static Logger logger = LogManager.getLogger(LoginWorkflow.class.getName());
+    private static Logger logger = LogManager.getLogger(LoginWorkflowUsingDotPropertiesFile.class.getName());
 
     private WaitforInterface waitforInterface;
     private BrowserInteractionService browserInteractionService;
 
-    public LoginWorkflow() {
+    public LoginWorkflowUsingDotPropertiesFile() {
         super();
         this.propertiesReader = new PropertiesReader();
         this.loginPO = new LoginPO();
@@ -72,11 +72,11 @@ public class LoginWorkflow extends TestBase {
     }
 
     @Test(dataProvider = "credetials",groups = "fields")
-    void testLogin(String userName,String password,Boolean flg) {
+    void testLogin(String auTestURL,String username,String password,boolean flg) {
         this.browserInteractionService = new BrowserInteractionServiceImplementation(webDriverInstance);
-        this.browserInteractionService.insertIntoField(loginPO.getUserIdfield(), userName);
+        this.browserInteractionService.insertIntoField(loginPO.getUserIdfield(), username);
         this.browserInteractionService.insertIntoField(loginPO.getPasswordField(), password);
-        this.browserInteractionService.clickTheButton(loginPO.getLoginButton());
+        this.browserInteractionService.clickByLocator(loginPO.getLoginButton());
         assertThat(waitforInterface.webDriverWaitTillVisibilityOfBy(homePO.getUserNamedisplay()).getText().equalsIgnoreCase("Veer Neti")).isEqualTo(flg);
     }
 

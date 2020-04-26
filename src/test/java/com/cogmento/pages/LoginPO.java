@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 
-@Setter
 @Getter
 public class LoginPO {
     private static Logger logger = LogManager.getLogger(LoginPO.class.getName());

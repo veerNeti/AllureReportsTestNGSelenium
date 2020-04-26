@@ -83,7 +83,7 @@ public class WebDriverManagementImp implements WebDriverManagement {
                 "--allow-running-insecure-content"
         );
         options.addArguments("window-size=800,480");
-        if (Objects.nonNull(headlessCheck)) {
+        if (Boolean.valueOf(headlessCheck)) {
             options.setHeadless(Boolean.TRUE);
         }
         DesiredCapabilities capabilities = new DesiredCapabilities();

@@ -70,14 +70,12 @@ public class PropertiesReader {
     }
 
     public String getPassword() {
-        return decodePassword(password);
+        return (password);
     }
 
     public String getBrowser() {
         return browser;
     }
 
-    public String decodePassword(String encodedString) {
-        return new String(Base64.getDecoder().decode(encodedString));
-    }
+
 }

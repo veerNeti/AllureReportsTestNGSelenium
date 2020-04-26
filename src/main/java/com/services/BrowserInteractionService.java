@@ -27,7 +27,8 @@ public interface BrowserInteractionService {
 
     void insertIntoField(By by, String inputText);
 
-    void clickTheButton(By by);
+    void clickByLocator(By by);
+    void clickWebElement(WebElement element);
 
     boolean isElementPresentBy(By by);
 
