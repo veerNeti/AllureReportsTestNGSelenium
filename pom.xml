@@ -48,7 +48,7 @@
         <extentreports.version>3.1.5</extentreports.version>
         <!--test data-->
         <apache-poi.version>4.1.2</apache-poi.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <log4j.version>2.6.1</log4j.version>
         <opencsv.version>3.4</opencsv.version>
         <!--test data-->
