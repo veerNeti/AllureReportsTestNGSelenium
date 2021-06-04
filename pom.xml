@@ -35,7 +35,7 @@
         <!--        <selenium.version>4.0.0-alpha-5</selenium.version>-->
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
         <maven.build.helper.plugin.version>3.0.0</maven.build.helper.plugin.version>
-        <httpclient.version>4.5.2</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <selenium-java.version>3.141.5</selenium-java.version>
         <logback-classic.version>1.0.13</logback-classic.version>
         <webdrivermanager.version>3.6.1</webdrivermanager.version>
